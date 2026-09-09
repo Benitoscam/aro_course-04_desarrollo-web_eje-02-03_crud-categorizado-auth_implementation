@@ -28,7 +28,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @guest
+                        @else
+                        <!-- Dashboard -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">Dashboard</a>
+                        </li>
+                        <!-- CATEGORÍAS -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/categoria/index') }}">Categorías</a>
+                        </li>
+                        <!-- ARTÍCULOS -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/articulo/index') }}">Artículos</a>
+                        </li>
+                        <!-- REPORTES -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/reporte/stock') }}">Reportes</a>
+                        </li>
+                        <!-- GESTIÓN DE USUARIOS -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/usuarios') }}">Gestión de Usuarios</a>
+                        </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -41,7 +63,7 @@
                         </li>
                         @endif
 
-                        @if (Route::has('register'))
+                        @if (Route::has('register') && App\Models\User::count() === 0)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
@@ -53,6 +75,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('/usuarios') }}">
+                                    <i class="fas fa-users"></i> Gestión de Usuarios
+                                </a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

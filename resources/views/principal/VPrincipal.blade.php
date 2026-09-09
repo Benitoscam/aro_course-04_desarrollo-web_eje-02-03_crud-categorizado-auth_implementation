@@ -80,6 +80,12 @@
                                     <label>REPORTES</label>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 opciones" href="/usuarios">
+                                    <img src="{{asset('img/reporte.png')}}">
+                                    <label>Gestion de Usuarios</label>
+                                </a>
+                            </li>
                             <li>
                                 <div class="contenedor-img-logo">
                                     <img src="{{ asset('img/logo.png') }}" alt="" class="img-fluid img-logo">

@@ -5,13 +5,14 @@ use App\Http\Controllers\CPrincipal;
 use App\Http\Controllers\CCategoria;
 use App\Http\Controllers\CArticulo;
 use App\Http\Controllers\CReporte;
+use App\Http\Controllers\CUsuario;
 use Illuminate\Support\Facades\Auth;
 
 
-// AUTENTICACIÓN
+/* AUTENTICACIÓN */
 Auth::routes();
 
-// RUTAS PROTEGIDAS
+/* RUTAS PROTEGIDAS */
 Route::middleware('auth')->group(function () {
 
     // PRINCIPAL
@@ -37,4 +38,19 @@ Route::middleware('auth')->group(function () {
 
     // RUTAS REPORTES
     Route::get('/reporte/stock', [CReporte::class, 'reporteStock']);
+
+    // RUTAS PARA GESTIÓN DE USUARIOS
+    Route::get('/usuarios', [CUsuario::class, 'index'])->name('usuarios.index');
+    Route::get('/usuarios/create', [CUsuario::class, 'create'])->name('usuarios.create');
+    Route::post('/usuarios/store', [CUsuario::class, 'store'])->name('usuarios.store');
+    Route::get('/usuarios/{id}/edit', [CUsuario::class, 'edit'])->name('usuarios.edit');
+    Route::put('/usuarios/{id}', [CUsuario::class, 'update'])->name('usuarios.update');
+    Route::get('/usuarios/{id}/destroy', [CUsuario::class, 'destroy'])->name('usuarios.destroy');
+});
+
+// RUTA PARA VERIFICAR CANTIDAD DE USUARIOS
+Route::get('/check-user-count', function () {
+    return response()->json([
+        'count' => App\Models\User::count()
+    ]);
 });
